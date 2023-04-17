@@ -20,6 +20,8 @@ public class DisplayManager : MonoBehaviour
 
     public int height;
 
+    public bool checkLock = true;
+
     void Start()
     {
         gameManager = GetComponent<GameManager>();
@@ -30,31 +32,40 @@ public class DisplayManager : MonoBehaviour
 
     void Update()
     {
-        if (SevenWin())
+        if (checkLock)
         {
-            gameManager.moneyAmount += 777;
-            Debug.Log("Seven Win");
+            if (SevenWin())
+            {
+                checkLock = false;
+                gameManager.moneyAmount += 777;
+                Debug.Log("Seven Win");
+            }
+            if (CherryWin())
+            {
+                checkLock = false;
+                gameManager.moneyAmount += 5;
+                Debug.Log("Cherry Win");
+            }
+            if (CrownWin())
+            {
+                checkLock = false;
+                gameManager.moneyAmount += 50;
+                Debug.Log("Crown Win");
+            }
+            if (CoinWin())
+            {
+                checkLock = false;
+                gameManager.moneyAmount += 100;
+                Debug.Log("Coin Win");
+            }
+            if (BarWin())
+            {
+                checkLock = false;
+                gameManager.moneyAmount += 20;
+                Debug.Log("Bar Win");
+            }
         }
-        if (CherryWin())
-        {
-            gameManager.moneyAmount += 5;
-            Debug.Log("Cherry Win");
-        }
-        if (CrownWin())
-        {
-            gameManager.moneyAmount += 50;
-            Debug.Log("Crown Win");
-        }
-        if (CoinWin())
-        {
-            gameManager.moneyAmount += 100;
-            Debug.Log("Coin Win");
-        }
-        if (BarWin())
-        {
-            gameManager.moneyAmount += 20;
-            Debug.Log("Bar Win");
-        }
+        
     }
 
 

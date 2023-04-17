@@ -14,7 +14,8 @@ public class GameManager : MonoBehaviour
     public DisplayManager displayManager;
     public bool isButtonPressed = false;
     public TMP_Text moneyText;
-    public int moneyAmount = 0;
+    public TMP_Text lostText;
+    public int moneyAmount = 3000;
     
     // Initialize Array
     public GameObject[][] Symbols;
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour
         
         displayManager = gameObject.GetComponent<DisplayManager>();
         moneyText = GameObject.Find("#").GetComponent<TMP_Text>();
+        lostText = GameObject.Find("Lost").GetComponent<TMP_Text>();
 
     } 
     
@@ -47,9 +49,23 @@ public class GameManager : MonoBehaviour
         
         // Add button function below
 
-        displayManager.Spin();
-        isButtonPressed = true;
+        displayManager.checkLock = true;
+        
+        if (moneyAmount <= 0)
+        {
+            displayManager.DestroyItems();
+            Time.timeScale = 0;
+            lostText.color = Color.red;
+            
+        }
 
+        else
+        {
+            moneyAmount -= 50;
+            displayManager.Spin();
+            isButtonPressed = true;
+        }
+        
     }
 
     private void Update()
