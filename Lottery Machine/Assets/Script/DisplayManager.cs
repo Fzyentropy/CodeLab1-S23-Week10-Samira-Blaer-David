@@ -8,7 +8,7 @@ public class DisplayManager : MonoBehaviour
 {
     private GameManager gameManager;
 
-    private int[,] tbd = new int[5,3];
+    private int[,] slots;
 
     public float xSpacing = 5;
 
@@ -16,16 +16,22 @@ public class DisplayManager : MonoBehaviour
 
     public Transform generateStartPos;
 
+    public int width;
+
+    public int height;
+
     void Start()
     {
         gameManager = GetComponent<GameManager>();
+        //set size of new array based on width and height variable
+        slots = new int [width, height];
 
         // Generate the array for test
-         for (int x = 0; x < 5; x++)
+         for (int x = 0; x < width; x++)
          {
-             for (int y = 0; y < 3; y++)
+             for (int y = 0; y < height; y++)
              {
-                 tbd[x, y] = Random.Range(0, 4);
+                 slots[x, y] = Random.Range(0, 4);
              }
          }
         
@@ -34,19 +40,39 @@ public class DisplayManager : MonoBehaviour
 
     void Update()
     {
-        
+        if (SevenWin())
+        {
+            Debug.Log("Seven Win");
+        }
+        if (CherryWin())
+        {
+            Debug.Log("Cherry Win");
+        }
+        if (CrownWin())
+        {
+            Debug.Log("Crown Win");
+        }
+        if (CoinWin())
+        {
+            Debug.Log("Coin Win");
+        }
+        if (BarWin())
+        {
+            Debug.Log("Bar Win");
+        }
     }
+    
 
     public void DisplayItems()
     {
         GameObject obj;
         GameObject Items = new GameObject();
         Items.name = "Items";
-        for (int x = 0; x < 5; x++)
+        for (int x = 0; x < width; x++)
         {
-            for (int y = 0; y < 3; y++)
+            for (int y = 0; y < height; y++)
             {
-                int index = tbd[x, y];
+                int index = slots[x, y];
                 switch (index)
                 {
                     case 0:
@@ -92,5 +118,60 @@ public class DisplayManager : MonoBehaviour
     public void DestroyItems()
     {
         Destroy(GameObject.Find("Items"));
+    }
+    
+    public bool SevenWin()
+    {
+        return Jackpot() == 0;
+    }
+    public bool CherryWin()
+    {
+        return Jackpot() == 1;
+    }
+
+    public bool CrownWin()
+    {
+        return Jackpot() == 2;
+    }
+    
+    public bool CoinWin()
+    {
+        return Jackpot() == 3;
+    }
+    
+    public bool BarWin()
+    {
+        return Jackpot() == 4;
+    }
+    
+
+    public int Jackpot()
+    {
+        for (var x = 0; x < width; x++)
+        {
+            for (var y = 0; y < height; y++)
+            {
+                if (x <= width - 4)
+                {
+                    if (slots[x, y] == slots[x + 1, y] && slots[x, y] == slots[x +2, y]
+                        && slots[x, y] == slots[x + 3, y] && slots[x, y] == slots[x + 4, y])
+                    {
+                        return slots[x, y];
+                    }
+                    if (slots[x, y + 1] == slots[x + 1, y + 1] && slots[x, y + 1] == slots[x +2, y + 1]
+                            && slots[x, y + 1] == slots[x + 3, y + 1] && slots[x, y + 1] == slots[x + 4, y + 1])
+                    {
+                        return slots[x, y];
+                    }
+                    if (slots[x, y + 2] == slots[x + 1, y + 2] && slots[x, y + 2] == slots[x +2, y + 2]
+                            && slots[x, y + 2] == slots[x + 3, y + 2] && slots[x, y + 2] == slots[x + 4, y + 2])
+                    {
+                        return slots[x, y];
+                    }
+                }
+            }
+        }
+
+        return 5;
     }
 }
