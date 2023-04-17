@@ -20,14 +20,14 @@ public class DisplayManager : MonoBehaviour
     {
         gameManager = GetComponent<GameManager>();
 
-        //Generate the array for test
-        // for (int x = 0; x < 5; x++)
-        // {
-        //     for (int y = 0; y < 3; y++)
-        //     {
-        //         tbd[x, y] = Random.Range(0, 4);
-        //     }
-        // }
+        // Generate the array for test
+         for (int x = 0; x < 5; x++)
+         {
+             for (int y = 0; y < 3; y++)
+             {
+                 tbd[x, y] = Random.Range(0, 4);
+             }
+         }
         
         DisplayItems();   
     }
@@ -39,7 +39,9 @@ public class DisplayManager : MonoBehaviour
 
     public void DisplayItems()
     {
-        GameObject obj = new GameObject();
+        GameObject obj;
+        GameObject Items = new GameObject();
+        Items.name = "Items";
         for (int x = 0; x < 5; x++)
         {
             for (int y = 0; y < 3; y++)
@@ -51,34 +53,44 @@ public class DisplayManager : MonoBehaviour
                         obj = Instantiate(gameManager.seven);
                         obj.transform.position =
                             generateStartPos.position + new Vector3(x * xSpacing, -y * ySpacing, 0f);
+                        obj.transform.parent = Items.transform;
                         break;
                     
                     case 1:
                         obj = Instantiate(gameManager.cherry);
                         obj.transform.position =
                             generateStartPos.position + new Vector3(x * xSpacing, -y * ySpacing, 0f);
+                        obj.transform.parent = Items.transform;
                         break;
                     
                     case 2:
                         obj = Instantiate(gameManager.crown);
                         obj.transform.position =
                             generateStartPos.position + new Vector3(x * xSpacing, -y * ySpacing, 0f);
+                        obj.transform.parent = Items.transform;
                         break;
                     
                     case 3:
                         obj = Instantiate(gameManager.money);
                         obj.transform.position =
                             generateStartPos.position + new Vector3(x * xSpacing, -y * ySpacing, 0f);
+                        obj.transform.parent = Items.transform;
                         break;
                     
                     case 4:
                         obj = Instantiate(gameManager.bar);
                         obj.transform.position =
                             generateStartPos.position + new Vector3(x * xSpacing, -y * ySpacing, 0f);
+                        obj.transform.parent = Items.transform;
                         break;
                     
                 }
             }
         }
+    }
+
+    public void DestroyItems()
+    {
+        Destroy(GameObject.Find("Items"));
     }
 }
