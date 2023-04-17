@@ -14,11 +14,18 @@ public class GameManager : MonoBehaviour
     public GameObject[][] Symbols;
     
     // Get Art reference
-    public Sprite seven;
-    public Sprite bar;
-    public Sprite cherry;
-    public Sprite crown;
-    public Sprite money;
+    // public Sprite seven;
+    // public Sprite bar;
+    // public Sprite cherry;
+    // public Sprite crown;
+    // public Sprite money;
+    
+    // Get Art reference prefab ver
+    public GameObject seven;
+    public GameObject bar;
+    public GameObject cherry;
+    public GameObject crown;
+    public GameObject money;
     
     
     void Start()
