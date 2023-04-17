@@ -25,44 +25,59 @@ public class DisplayManager : MonoBehaviour
         gameManager = GetComponent<GameManager>();
         //set size of new array based on width and height variable
         slots = new int [width, height];
-
-        // Generate the array for test
-         for (int x = 0; x < width; x++)
-         {
-             for (int y = 0; y < height; y++)
-             {
-                 slots[x, y] = Random.Range(0, 4);
-             }
-         }
         
-        DisplayItems();   
     }
 
     void Update()
     {
         if (SevenWin())
         {
+            gameManager.moneyAmount += 777;
             Debug.Log("Seven Win");
         }
         if (CherryWin())
         {
+            gameManager.moneyAmount += 5;
             Debug.Log("Cherry Win");
         }
         if (CrownWin())
         {
+            gameManager.moneyAmount += 50;
             Debug.Log("Crown Win");
         }
         if (CoinWin())
         {
+            gameManager.moneyAmount += 100;
             Debug.Log("Coin Win");
         }
         if (BarWin())
         {
+            gameManager.moneyAmount += 20;
             Debug.Log("Bar Win");
         }
     }
-    
 
+
+    public void Spin()
+    {
+        // Generate the array for test
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                slots[x, y] = Random.Range(0, 5);
+            }
+        }
+
+        if (GameObject.Find("Items") != null)
+        {
+            DestroyItems();
+        }
+        
+        DisplayItems();   
+    }
+
+    
     public void DisplayItems()
     {
         GameObject obj;
@@ -151,23 +166,23 @@ public class DisplayManager : MonoBehaviour
         {
             for (var y = 0; y < height; y++)
             {
-                if (x <= width - 4)
+                if (x == 0 && gameManager.isButtonPressed)
                 {
                     if (slots[x, y] == slots[x + 1, y] && slots[x, y] == slots[x +2, y]
                         && slots[x, y] == slots[x + 3, y] && slots[x, y] == slots[x + 4, y])
                     {
                         return slots[x, y];
                     }
-                    if (slots[x, y + 1] == slots[x + 1, y + 1] && slots[x, y + 1] == slots[x +2, y + 1]
+                    /*if (slots[x, y + 1] == slots[x + 1, y + 1] && slots[x, y + 1] == slots[x +2, y + 1]
                             && slots[x, y + 1] == slots[x + 3, y + 1] && slots[x, y + 1] == slots[x + 4, y + 1])
                     {
                         return slots[x, y];
-                    }
-                    if (slots[x, y + 2] == slots[x + 1, y + 2] && slots[x, y + 2] == slots[x +2, y + 2]
+                    }*/
+                    /*if (slots[x, y + 2] == slots[x + 1, y + 2] && slots[x, y + 2] == slots[x +2, y + 2]
                             && slots[x, y + 2] == slots[x + 3, y + 2] && slots[x, y + 2] == slots[x + 4, y + 2])
                     {
                         return slots[x, y];
-                    }
+                    }*/
                 }
             }
         }

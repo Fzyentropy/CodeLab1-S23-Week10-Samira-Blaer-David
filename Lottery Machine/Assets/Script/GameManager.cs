@@ -1,24 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
 
-    // Initialize Button
+    // Initialize Variables
     public Button spin;
+    public DisplayManager displayManager;
+    public bool isButtonPressed = false;
+    public TMP_Text moneyText;
+    public int moneyAmount = 0;
     
     // Initialize Array
     public GameObject[][] Symbols;
-    
-    // Get Art reference
-    // public Sprite seven;
-    // public Sprite bar;
-    // public Sprite cherry;
-    // public Sprite crown;
-    // public Sprite money;
     
     // Get Art reference prefab ver
     public GameObject seven;
@@ -33,7 +32,11 @@ public class GameManager : MonoBehaviour
         // Get Button reference and set click function to "SpinSlot" function below
         spin = GameObject.Find("Spin").GetComponent<Button>();
         spin.onClick.AddListener(SpinSlot);
-    }
+        
+        displayManager = gameObject.GetComponent<DisplayManager>();
+        moneyText = GameObject.Find("#").GetComponent<TMP_Text>();
+
+    } 
     
 
     
@@ -43,11 +46,14 @@ public class GameManager : MonoBehaviour
         Debug.Log("Button Clicked");
         
         // Add button function below
-        
+
+        displayManager.Spin();
+        isButtonPressed = true;
 
     }
-    
-    
-    
-    
+
+    private void Update()
+    {
+        moneyText.text = moneyAmount.ToString();
+    }
 }
