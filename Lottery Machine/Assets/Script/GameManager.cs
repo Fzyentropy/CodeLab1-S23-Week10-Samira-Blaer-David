@@ -8,8 +8,19 @@ public class GameManager : MonoBehaviour
 {
 
     // Initialize Button
-    
     public Button spin;
+    
+    // Initialize Array
+    public GameObject[][] Symbols;
+    
+    // Get Art reference
+    public Sprite seven;
+    public Sprite bar;
+    public Sprite cherry;
+    public Sprite crown;
+    public Sprite money;
+    
+    
     void Start()
     {
         // Get Button reference and set click function to "SpinSlot" function below
@@ -20,14 +31,13 @@ public class GameManager : MonoBehaviour
 
     
     // TODO Button CLick function
-    public static void SpinSlot()
+    public void SpinSlot()
     {
         Debug.Log("Button Clicked");
         
         // Add button function below
         
-        
-        
+
     }
     
     

@@ -839,3 +839,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dcc317ea4931594e95ff1fde5ec3e06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spin: {fileID: 0}
+  seven: {fileID: 21300000, guid: 15b49405e358568469ada9d2733ef9da, type: 3}
+  bar: {fileID: 21300000, guid: a3d2f7f51aae99a40964b9b1d556ac96, type: 3}
+  cherry: {fileID: 21300000, guid: 359aa1529bbb7314e93e32614e734cc7, type: 3}
+  crown: {fileID: 21300000, guid: f81fe3d5886b8ca46aa315a410b958a0, type: 3}
+  money: {fileID: 21300000, guid: e7f030ce782d1a141aee33fd6838d8ae, type: 3}
